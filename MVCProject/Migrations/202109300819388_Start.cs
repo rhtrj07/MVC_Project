@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class start : DbMigration
+    public partial class Start : DbMigration
     {
         public override void Up()
         {
@@ -12,11 +12,15 @@
                 c => new
                     {
                         EmployeeID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        FName = c.String(),
+                        LName = c.String(),
                         PasswordHash = c.String(maxLength: 50),
                         Mobile = c.Long(),
                         Email = c.String(),
                         Designation = c.String(),
+                        Roll = c.String(),
+                        DOB = c.DateTime(),
+                        Gender = c.String(),
                         ProjManagerID = c.Int(),
                         Address = c.String(),
                         Location = c.String(),

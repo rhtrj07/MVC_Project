@@ -31,7 +31,5 @@ namespace MVCProject.Models
         public virtual EmployeeDetails EmployeeDetails { get; set; }
         //-------------------------------------------
 
-
-
     }
 }
