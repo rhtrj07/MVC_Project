@@ -221,6 +221,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,17 +229,41 @@
     <Compile Include="Migrations\202109281721338_start.designer.cs">
       <DependentUpon>202109281721338_start.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109301702447_update.cs" />
+    <Compile Include="Migrations\202109301702447_update.designer.cs">
+      <DependentUpon>202109301702447_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeDBContext.cs" />
     <Compile Include="Models\EmployeeDetails.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< Updated upstream
+=======
+    <Compile Include="Repositories\ProfileRepository.cs" />
+    <Compile Include="Repositories\UsersRepository.cs" />
+    <Compile Include="ServiceLayer\MapperExtensions.cs" />
+    <Compile Include="ServiceLayer\ProfileService.cs" />
+    <Compile Include="ServiceLayer\SHA256HashGenerator.cs" />
+    <Compile Include="ServiceLayer\UserService.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+<<<<<<< Updated upstream
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
+=======
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Profile\Views.cshtml" />
+>>>>>>> Stashed changes
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -258,6 +283,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202109281721338_start.resx">
       <DependentUpon>202109281721338_start.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109301702447_update.resx">
+      <DependentUpon>202109301702447_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

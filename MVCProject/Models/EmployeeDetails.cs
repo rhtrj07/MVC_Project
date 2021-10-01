@@ -30,7 +30,12 @@ namespace MVCProject.Models
         [ForeignKey("ProjManagerID")]
         public virtual EmployeeDetails ProjIDEmployee { get; set; }
 
+<<<<<<< Updated upstream
         public virtual ICollection<LeaveRequest> LeaveRequests { get; set; }
+=======
+    }
+}
+>>>>>>> Stashed changes
 
 
     }

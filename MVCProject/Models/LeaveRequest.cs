@@ -26,10 +26,7 @@ namespace MVCProject.Models
         [ForeignKey("EmployeeID")]
         public virtual EmployeeDetails EmpIDEmployee { get; set; }
 
-        //-------------------------------------------
-
-        public virtual EmployeeDetails EmployeeDetails { get; set; }
-        //-------------------------------------------
+       
 
 
 
