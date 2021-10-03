@@ -172,6 +172,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom\all.css" />
+    <Content Include="Scripts\custom\css\bootstrap-admin.css" />
     <Content Include="Scripts\custom\css\main.css" />
     <Content Include="Scripts\custom\css\sidebar-themes.css" />
     <Content Include="Scripts\custom\CustomScrollbar.concat.min.js" />
@@ -185,6 +186,7 @@
     <Content Include="Scripts\custom\img\user.jpg" />
     <Content Include="Scripts\custom\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="Scripts\custom\jquery.mCustomScrollbar.min.css" />
+    <Content Include="Scripts\custom\js\bootstrap-admin.js" />
     <Content Include="Scripts\custom\js\main.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -316,6 +318,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -331,17 +335,29 @@
     <Compile Include="Migrations\202109300857129_Start1.designer.cs">
       <DependentUpon>202109300857129_Start1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110010554083_update.cs" />
+    <Compile Include="Migrations\202110010554083_update.designer.cs">
+      <DependentUpon>202110010554083_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110030643223_update1.cs" />
+    <Compile Include="Migrations\202110030643223_update1.designer.cs">
+      <DependentUpon>202110030643223_update1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeDBContext.cs" />
     <Compile Include="Models\EmployeeDetails.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
     <Compile Include="ServiceLayer\MapperExtensions.cs" />
+    <Compile Include="ServiceLayer\ProfileService.cs" />
     <Compile Include="ServiceLayer\SHA256HashGenerator.cs" />
     <Compile Include="ServiceLayer\UserService.cs" />
+    <Compile Include="ViewModels\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +367,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Profile\Views.cshtml" />
+    <Content Include="Views\Profile\Edits.cshtml" />
+    <Content Include="Views\Leave\Apply.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -376,6 +395,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109300857129_Start1.resx">
       <DependentUpon>202109300857129_Start1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110010554083_update.resx">
+      <DependentUpon>202110010554083_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110030643223_update1.resx">
+      <DependentUpon>202110030643223_update1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Apply Leave";
+}
+
+
+<div id="content" class="container col-md-8 ">
+    <!-- Title -->
+    <h1>Apply Leave</h1>
+    <!-- End Title -->
+
+
+    <div class="page-content">
+        <!-- Apply Leave Form -->
+        <div class="card pmd-card single-col-form">
+            <form id="apply-leave" method="post" action="">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label ">
+                                <label for="leave-type">Leave Type</label>
+                                <select name="leave-type" id="leave-type" class="form-control" title="Please select a Leave Type" required>
+                                    <option></option>
+                                    <option>Sick Leave</option>
+                                    <option>Casual Leave</option>
+                                    <option>Unpaid Leave</option>
+                                    <option>Paid Leave</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                @*<label class="control-label" for="datepickerstart">Start Date</label>*@
+                                From:
+                                <input type="date" class="form-control" id="datepickerstart" name="datepickerstart">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                To:
+                                @*<label class="control-label" for="datepickerend">End Date</label>*@
+                                <input type="date" class="form-control" id="datepickerend" name="datepickerend" value="1998-04-04">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label>Reason</label>
+                                <textarea class="form-control" id="reason" name="reason"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="custom-control custom-checkbox pmd-checkbox">
+                                <input class="custom-control-input" type="checkbox" value="" id="inverse_defaultCheck1">
+                                <label class="custom-control-label" for="inverse_defaultCheck1">
+                                    Is it a Half Day?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" name="applyleave" value="Apply Leave">Apply Leave</button> <a href="leave.html" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*<script>// Add Education start date date and time picker
+    $('#datepickerstart').datetimepicker({
+        format: 'DD-MM-YYYY'
+    });
+
+    // Add Education End date date and time picker
+    $('#datepickerend').datetimepicker({
+        useCurrent: false,
+        format: 'DD-MM-YYYY'
+    });
+
+    // start date picker
+    $("#datepickerstart").on("dp.change", function (e) {
+        $('#datepickerend').data("DateTimePicker").minDate(e.date);
+    });
+    // end date picker
+    $("#datepickerend").on("dp.change", function (e) {
+        $('#datepickerstart').data("DateTimePicker").maxDate(e.date);
+    });
+
+</script>*@

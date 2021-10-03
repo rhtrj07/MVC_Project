@@ -1,15 +1,15 @@
-﻿@using System.Web.Optimization
+﻿@using System.Web.Optimization;
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title - MVC Project</title>
+    <title>@ViewBag.Title</title>
 
 
-    @Styles.Render("~/Styles/bootstrap")
-    @Scripts.Render("~/Scripts/bootstrap") 
-    @Styles.Render("~/Styles/custom/bootstrap")
-    @Scripts.Render("~/Scripts/custom/bootstrap")
+    @Styles.Render("~/Styles/bootstrap");
+    @Scripts.Render("~/Scripts/bootstrap"); 
+    @Styles.Render("~/Styles/custom/bootstrap");
+    @Scripts.Render("~/Scripts/custom/bootstrap");
 
 </head>
 <body>
@@ -45,7 +45,7 @@
                     <!-- sidebar-header  -->
                     <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                         <div class="user-pic">
-                            <img class="img-responsive img-rounded" src="~/Images/Rohit.jpeg" alt="User picture">
+                            <img class="img-responsive img-rounded" src=@Session["CurrentUserProfilePhoto"] alt="User picture">
                         </div>
                         <div class="user-info">
                             <span class="user-name">
@@ -100,10 +100,10 @@
                                     <div class="sidebar-submenu">
                                         <ul>
                                             <li>
-                                                <a href="#">View</a>
+                                                <a href="/profile/views">View</a>
                                             </li>
                                             <li>
-                                                <a href="#">Edit</a>
+                                                <a href="/profile/edits">Edit</a>
                                             </li>
                                         </ul>
                                     </div>

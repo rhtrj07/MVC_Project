@@ -39,18 +39,12 @@ namespace MVCProject.Controllers
                     Session["CurrentUserPassword"] = uvm.Password;
                     Session["CurrentUserRoll"] = uvm.Roll;
                     Session["CurrentUserDesignation"] = uvm.Designation;
+                    Session["CurrentUserProfilePhoto"] = uvm.ImageURL;
+
 
 
                     return RedirectToAction("index", "Home");
 
-                    //if (uvm.IsAdmin)
-                    //{
-                    //    return RedirectToRoute(new { area = "admin", controller = "AdminHome", action = "index" });
-                    //}
-                    //else
-                    //{
-                    //    return RedirectToAction("index", "Home");
-                    //}
                 }
                 else
                 {

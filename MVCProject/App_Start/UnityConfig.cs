@@ -17,7 +17,9 @@ namespace MVCProject
 
             
             container.RegisterType<IUsersService, UsersService>();
-          
+            container.RegisterType<IProfileService, ProfileService>();
+
+
 
             DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);

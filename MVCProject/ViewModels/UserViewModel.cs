@@ -15,5 +15,6 @@ namespace MVCProject.ViewModels
         public string Mobile { get; set; }
         public string Roll { get; set; }
         public string Designation { get; set; }
+        public string ImageURL { get; set; }
     }
 }
