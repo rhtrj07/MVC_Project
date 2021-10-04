@@ -18,7 +18,7 @@ namespace MVCProject
             
             container.RegisterType<IUsersService, UsersService>();
             container.RegisterType<IProfileService, ProfileService>();
-
+            container.RegisterType<ILeaveService, LeaveService>();
 
 
             DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));

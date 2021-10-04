@@ -24,11 +24,13 @@ namespace MVCProject.ViewModels
 
         public string Designation { get; set; }
 
-        public string Roll { get; set; }
+        public string Role { get; set; }
         public DateTime DOB { get; set; }
         public string Gender { get; set; }
         public string ImageURL { get; set; }
         public string Address { get; set; }
         public string Location { get; set; }
+        public int ProjManagerID { get; set; }
+
     }
 }

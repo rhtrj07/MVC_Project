@@ -8,26 +8,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCProject.Models
 {
-    public class LeaveRequest
+    public class LeaveRequestName
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LeaveRequestID { get; set; }
-        [Display(Name = "EmployeeID")]
-        public int EmployeeID { get; set; }
-        public Nullable <int> ProjManagerID { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public string Description { get; set; }
         public string LeaveType { get; set; }
         public string LeaveStatus { get; set; }
-
-        //-------------------------------------------
-        
-        [ForeignKey("EmployeeID")]
-        public virtual EmployeeDetails EmpIDEmployee { get; set; }
-
-        public virtual EmployeeDetails EMP { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
 
     }
 

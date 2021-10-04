@@ -40,23 +40,31 @@ namespace MVCProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edits(ProfileViewModel pvm)
         {
-            var file = Request.Files[0];
-            var imagebyte = new byte[file.ContentLength - 1];
-            file.InputStream.Read(imagebyte, 0, file.ContentLength - 1);
-            var base64string = Convert.ToBase64String(imagebyte, 0, imagebyte.Length);
-            byte[] data = Convert.FromBase64String(base64string);
+            try
+            {
+                var file = Request.Files[0];
+                var imagebyte = new byte[file.ContentLength - 1];
+                file.InputStream.Read(imagebyte, 0, file.ContentLength - 1);
+                var base64string = Convert.ToBase64String(imagebyte, 0, imagebyte.Length);
+                byte[] data = Convert.FromBase64String(base64string);
 
-            pvm.EmployeeID= Convert.ToInt32(Session["CurrentUserID"]);
-            //string path = AppDomain.CurrentDomain.BaseDirectory;
-            string folderPath = Server.MapPath("~/Images/");
+                pvm.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
+                //string path = AppDomain.CurrentDomain.BaseDirectory;
+                string folderPath = Server.MapPath("~/Images/");
 
-            string imagepath = folderPath+pvm.EmployeeID+".jpeg";
+                string imagepath = folderPath + pvm.EmployeeID + ".jpeg";
 
-            pvm.ImageURL = imagepath;
+                pvm.ImageURL = imagepath;
 
-            string path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Images");
+                string path = Path.Combine(Environment.CurrentDirectory, @"Data", "Images");
 
-            System.IO.File.WriteAllBytes(imagepath, data);
+                System.IO.File.WriteAllBytes(imagepath, data);
+            }
+            catch
+            {
+                pvm.ImageURL = null;
+            }
+           
 
             if (ModelState.IsValid)
             {

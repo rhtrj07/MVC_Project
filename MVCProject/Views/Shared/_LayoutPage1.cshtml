@@ -45,13 +45,13 @@
                     <!-- sidebar-header  -->
                     <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                         <div class="user-pic">
-                            <img class="img-responsive img-rounded" src=@Session["CurrentUserProfilePhoto"] alt="User picture">
+                            <img class="img-responsive img-rounded" src="~/Images/" alt="User picture">
                         </div>
                         <div class="user-info">
                             <span class="user-name">
                                 <strong>@Session["CurrentUserName"]</strong>
                             </span>
-                            <span class="user-role">@Session["CurrentUserRoll"]</span>
+                            <span class="user-role">@Session["CurrentUserRole"]</span>
                             <span class="user-role">@Session["CurrentUserDesignation"]</span>
                             <span class="user-status">
                                 <i class="fa fa-circle"></i>
@@ -60,6 +60,9 @@
                         </div>
                     </div>
                 }
+
+
+
                 <!-- sidebar-search  -->
                 <div class="sidebar-item sidebar-search">
                     <div>
@@ -87,9 +90,9 @@
                                 <span class="menu-text">Dashboard</span>
                             </a>
                         </li>
-                        @if (Session["CurrentUserName"] != null)
-                        {
-                            if (Session["CurrentUserRoll"].ToString() == "employee")
+                        @if(Session["CurrentUserRole"] != null)
+                        { 
+                            if (Session["CurrentUserRole"].ToString() == "Employee")
                             {
                                 <li class="sidebar-dropdown">
                                     <a href="#">
@@ -117,26 +120,58 @@
                                     <div class="sidebar-submenu">
                                         <ul>
                                             <li>
-                                                <a href="#">Leave Request</a>
+                                                <a href="/leave/apply">Leave Request</a>
                                             </li>
                                             <li>
-                                                <a href="#">Leave Status</a>
+                                                <a href="/leave/viewall">Leave Status</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </li>
                             }
+
+                            if (Session["CurrentUserRole"].ToString() == "Project Manager")
+                            {
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="far fa-address-card"></i>
+                                    <span class="menu-text">My Profile</span>
+                                    <span class="badge badge-pill badge-danger">2</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a href="/profile/views">All Request</a>
+                                        </li>
+                                        <li>
+                                            <a href="/profile/edits">Pending Request</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fas fa-book"></i>
+                                    <span class="menu-text">Request</span>
+                                    <span class="badge badge-pill badge-danger">2</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a href="/leave/allrequest">All Request</a>
+                                        </li>
+                                        <li>
+                                            <a href="/leave/pendingrequest">Pending Request</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            }
                         }
-                        
+
+
                         <li class="header-menu">
                             <span>Extra</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-book"></i>
-                                <span class="menu-text">Documentation</span>
-                                <span class="badge badge-pill badge-primary">Beta</span>
-                            </a>
                         </li>
                         <li>
                             <a href="#">

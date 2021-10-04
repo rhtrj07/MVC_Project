@@ -37,7 +37,7 @@ namespace MVCProject.Controllers
                     Session["CurrentUserName"] = uvm.FName+ " " + uvm.LName;
                     Session["CurrentUserEmail"] = uvm.Email;
                     Session["CurrentUserPassword"] = uvm.Password;
-                    Session["CurrentUserRoll"] = uvm.Roll;
+                    Session["CurrentUserRole"] = uvm.Role;
                     Session["CurrentUserDesignation"] = uvm.Designation;
                     Session["CurrentUserProfilePhoto"] = uvm.ImageURL;
 

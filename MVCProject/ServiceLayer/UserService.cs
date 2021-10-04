@@ -15,7 +15,9 @@ namespace MVCProject.ServiceLayer
     {
         
         UserViewModel GetUsersByEmailAndPassword(string Email, string Password);
-        
+        ProfileViewModel GetManagerID(int id);
+
+
     }
 
     public class UsersService : IUsersService
@@ -36,6 +38,19 @@ namespace MVCProject.ServiceLayer
                 var config = new MapperConfiguration(cfg => { cfg.CreateMap<EmployeeDetails, UserViewModel>(); cfg.IgnoreUnmapped(); });
                 IMapper mapper = config.CreateMapper();
                 uvm = mapper.Map<EmployeeDetails, UserViewModel>(u);
+            }
+            return uvm;
+        }
+
+        public ProfileViewModel GetManagerID(int id)
+        {
+            EmployeeDetails u = ur.GetManagerID(id).FirstOrDefault();
+            ProfileViewModel uvm = null;
+            if (u != null)
+            {
+                var config = new MapperConfiguration(cfg => { cfg.CreateMap<EmployeeDetails, ProfileViewModel>(); cfg.IgnoreUnmapped(); });
+                IMapper mapper = config.CreateMapper();
+                uvm = mapper.Map<EmployeeDetails, ProfileViewModel>(u);
             }
             return uvm;
         }

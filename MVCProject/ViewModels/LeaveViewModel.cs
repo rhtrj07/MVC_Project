@@ -5,31 +5,34 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-namespace MVCProject.Models
+namespace MVCProject.ViewModels
 {
-    public class LeaveRequest
+    public class LeaveViewModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
+        //public int LeaveRequestID { get; set; }
+        
         public int LeaveRequestID { get; set; }
-        [Display(Name = "EmployeeID")]
         public int EmployeeID { get; set; }
-        public Nullable <int> ProjManagerID { get; set; }
+        public int ProjManagerID { get; set; }
+
+        [Required]
         public DateTime FromDate { get; set; }
+        
+        [Required] 
         public DateTime ToDate { get; set; }
+        
+        [Required]
         public string Description { get; set; }
+
+        [Required]
         public string LeaveType { get; set; }
+
         public string LeaveStatus { get; set; }
 
-        //-------------------------------------------
-        
-        [ForeignKey("EmployeeID")]
-        public virtual EmployeeDetails EmpIDEmployee { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
 
-        public virtual EmployeeDetails EMP { get; set; }
 
     }
-
-
 }

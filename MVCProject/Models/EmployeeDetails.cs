@@ -10,6 +10,11 @@ namespace MVCProject.Models
 {
     public class EmployeeDetails
     {
+        public EmployeeDetails()
+        {
+            this.LeaveRequests = new HashSet<LeaveRequest>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmployeeID { get; set; }
@@ -20,7 +25,7 @@ namespace MVCProject.Models
         public Nullable <long> Mobile { get; set; }
         public string Email { get; set; }
         public string Designation { get; set; }
-        public string Roll { get; set; }
+        public string Role { get; set; }
         public Nullable<DateTime> DOB { get; set; }
         public string Gender { get; set; }
         public string ImageURL { get; set; }
@@ -34,6 +39,7 @@ namespace MVCProject.Models
         [ForeignKey("ProjManagerID")]
         public virtual EmployeeDetails ProjIDEmployee { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage","CA2227:CollectionPropertiesShouldBeRealOnly")]
         public virtual ICollection<LeaveRequest> LeaveRequests { get; set; }
     }
 }
