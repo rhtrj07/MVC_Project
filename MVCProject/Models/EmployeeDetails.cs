@@ -24,7 +24,7 @@ namespace MVCProject.Models
         public string PasswordHash { get; set; }
         public Nullable <long> Mobile { get; set; }
         public string Email { get; set; }
-        public string Designation { get; set; }
+        public string Department { get; set; }
         public string Role { get; set; }
         public Nullable<DateTime> DOB { get; set; }
         public string Gender { get; set; }

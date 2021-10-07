@@ -7,44 +7,36 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCProject.ViewModels
 {
-    public class ProfileViewModel
+    public class AddNewEmployeeViewModel
     {
-
-        public int EmployeeID { get; set; }
-
+        [Required]
         public string FName { get; set; }
 
+        [Required]
         public string LName { get; set; }
 
+        [Required]
+        public string PasswordHash { get; set; }
+
+        [Required]
         public long Mobile { get; set; }
 
-        public string Department { get; set; }
-
-        public string Role { get; set; }
-
-        
+        [Required]
         public string Email { get; set; }
 
         [Required]
+        public string Department { get; set; }
+
+        [Required]
+        public string Role { get; set; }
+
+
+        public int? ProjManagerID { get; set; }
         public DateTime DOB { get; set; }
-
-        [Required]
         public string Gender { get; set; }
-
         public string ImageURL { get; set; }
-
-        [Required]
         public string Address { get; set; }
-
-        [Required]
         public string Location { get; set; }
-
-
-        public int ProjManagerID { get; set; }
-
-        public string PMFName { get; set; }
-
-        public string PMLName { get; set; }
 
     }
 }

@@ -1,0 +1,94 @@
+﻿@model MVCProject.ViewModels.AddNewEmployeeViewModel
+@using MVCProject.Models;
+
+@{
+    ViewBag.Title = "Change Profile";
+}
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+               
+            </div>
+        </div>
+        <div class="col-md-6 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <form novalidate="novalidate" action="/profile/AddNewEmployee" method="post" class="needs-validation" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Name</label><input type="text" class="form-control" name="FName" value=@Model.FName placeholder="Enter First Name">
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Invalid First Name</div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Surname</label><input type="text" class="form-control" name="LName" value=@Model.LName placeholder="Enter Last Name">
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Invalid Last Name</div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="row mt-3">
+
+                            <div class="col-md-12"><label class="labels">Email ID</label><input type="email" class="form-control" name="Email" value=@Model.Email placeholder="Enter Email"></div>
+
+                            <div class="col-md-12"><label class="labels">Password </label><input type="text" class="form-control" name="PasswordHash" value=@Model.PasswordHash placeholder="Enter Password"></div>
+
+
+                            <div class="col-md-12">
+                                <label class="labels">Department</label>
+                                @Html.DropDownListFor(m => m.Department, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Department))), "Select Department", new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="labels">Role</label>
+                                @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Role))), "Select Role", new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-12"><label class="labels">Date Of Birth</label><input type="date" class="form-control" name="DOB" value=@Model.DOB.ToString("yyyy-MM-dd")></div>
+                            <div class="col-md-12">
+                                <label class="labels">Project Manager</label>
+                                @Html.DropDownListFor(m => m.ProjManagerID, new SelectList(ViewBag.PMList, "EmployeeID", "FName"), new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Gender</label>
+                                @Html.DropDownListFor(m => m.Gender, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Gender))), "Select Gender", new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" name="Mobile" value="@Model.Mobile"></div>
+
+                    </div>
+                    <div class="mt-5 text-center"><button type="submit" class="btn btn-primary profile-button">Update Profile</button></div>
+                    <div class="text-danger">
+                        @Html.ValidationSummary()
+                    </div>
+</div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<script>
+    $("a[href='/profile/AddNewEmployee']").attr("id", "active");
+
+    $(document).on("submit", ".needs-validation", validate);
+    $(".needs-validation input").blur(validate);
+    function validate(event) {
+        if ($(".needs-validation")[0].checkValidity() == false) {
+            event.preventDefault();
+        }
+        $(".needs-validation")[0].classList.add("was-validated");
+    }
+</script>

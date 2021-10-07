@@ -11,61 +11,63 @@ namespace MVCProject.Controllers
 {
     public class LeaveController : Controller
     {
-        IUsersService us;
-        ILeaveService ls;
+        IUsersService UsersServices;
+        ILeaveService LeaveServices;
 
-        public LeaveController(IUsersService us, ILeaveService ls)
+        public LeaveController(IUsersService UsersServices, ILeaveService LeaveServices)
         {
-            this.us = us;
-            this.ls = ls;
+            this.UsersServices = UsersServices;
+            this.LeaveServices = LeaveServices;
         }
 
         // GET: Leave
         public ActionResult Apply()
         {
-            LeaveViewModel lvm = new LeaveViewModel();
-            return View(lvm);
+            LeaveViewModel LeaveViewModels = new LeaveViewModel();
+            return View(LeaveViewModels);
         }
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Apply(LeaveViewModel lvm)
+        public ActionResult Apply(LeaveViewModel LeaveViewModels)
         {
-            int pmid = Convert.ToInt32(Session["CurrentUserID"]);
-            ProfileViewModel pvm = this.us.GetManagerID(pmid);
-            lvm.ProjManagerID = pvm.ProjManagerID;
-            lvm.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
-            lvm.LeaveStatus = "Pending";
+            int id = Convert.ToInt32(Session["CurrentUserID"]);
+            ProfileViewModel ProfileViewModels = this.UsersServices.GetManagerID(id);
+            LeaveViewModels.ProjManagerID = ProfileViewModels.ProjManagerID;
+            LeaveViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
+            LeaveViewModels.LeaveStatus = "Pending";
 
-            this.ls.InsertLeaveRequest(lvm);
+            this.LeaveServices.InsertLeaveRequest(LeaveViewModels);
             return RedirectToAction("index", "Home");
         }
 
-        public ActionResult Viewall()
+        public ActionResult ViewAll()
         {
             int id = Convert.ToInt32(Session["CurrentUserID"]);
-            List<LeaveViewModel> lvm = this.ls.GetAllRequestByID(id);
-            return View(lvm);
+            List<LeaveViewModel> LeaveViewModels = this.LeaveServices.GetAllRequestByID(id);
+            return View(LeaveViewModels);
         }
 
-        public ActionResult allrequest()
+
+
+        public ActionResult AllRequest()
         {
             int id = Convert.ToInt32(Session["CurrentUserID"]);
-            List<LeaveViewModel> lvm = this.ls.GetAllRequestByPMID(id);
-            return View(lvm);
+            List<LeaveViewModel> LeaveViewModels = this.LeaveServices.GetAllRequestByPMID(id);
+            return View(LeaveViewModels);
         } 
          
-        public ActionResult pendingrequest()
+        public ActionResult PendingRequest()
         {
             int id = Convert.ToInt32(Session["CurrentUserID"]);
-            List<LeaveViewModel> lvm = this.ls.GetAllRequestByPMID(id);
-            return View(lvm);
+            List<LeaveViewModel> LeaveViewModels = this.LeaveServices.GetAllRequestByPMID(id);
+            return View(LeaveViewModels);
         } 
         
-        public ActionResult updatestatus(UpdateStatusViewModel usvm )
+        public ActionResult updatestatus(UpdateStatusViewModel UpdateStatusViewModels)
         {
-            int id = usvm.LeaveRequestID;
-            this.ls.UpstateStatusByLeaveID(usvm);
+            int id = UpdateStatusViewModels.LeaveRequestID;
+            this.LeaveServices.UpstateStatusByLeaveID(UpdateStatusViewModels);
 
             return RedirectToAction("allrequest", "Leave");
         }

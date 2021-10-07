@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "CUSTOMER SEARCH";
+}
+<br />
+<br />
+<br />
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+       $("#txtSearch").autocomplete({
+
+            source: '@Url.Action("GetEmployee", "Search")',
+
+            minLength: 1
+
+        });
+    });
+
+</script>
+
+<div class="form-group">
+    &nbsp &nbsp &nbsp &nbsp &nbsp SEARCH:
+    &nbsp &nbsp &nbsp &nbsp &nbsp  @Html.TextBox("searchTerm", null, new { id = "txtSearch", Class = "autosuggest" })
+</div>

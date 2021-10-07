@@ -20,6 +20,7 @@ namespace MVCProject
             GlobalConfiguration.Configure(WebApiConfig.Register);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
         }
     }
 }

@@ -16,6 +16,7 @@ namespace MVCProject.ServiceLayer
         
         UserViewModel GetUsersByEmailAndPassword(string Email, string Password);
         ProfileViewModel GetManagerID(int id);
+        bool CheckIfDeleteIsAllowed(int id);
 
 
     }
@@ -53,6 +54,12 @@ namespace MVCProject.ServiceLayer
                 uvm = mapper.Map<EmployeeDetails, ProfileViewModel>(u);
             }
             return uvm;
+        }
+
+        public bool CheckIfDeleteIsAllowed(int id)
+        {
+            bool u = ur.CheckIfDeleteIsAllowed(id);
+            return u;
         }
     }
 }

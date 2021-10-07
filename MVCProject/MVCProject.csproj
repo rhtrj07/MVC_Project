@@ -311,6 +311,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\DeleteController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
@@ -370,11 +371,18 @@
     <Compile Include="Migrations\202110041347051_update8.designer.cs">
       <DependentUpon>202110041347051_update8.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110061655358_update9.cs" />
+    <Compile Include="Migrations\202110061655358_update9.designer.cs">
+      <DependentUpon>202110061655358_update9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeDBContext.cs" />
     <Compile Include="Models\EmployeeDetails.cs" />
+    <Compile Include="Models\EmployeeDetailsName.cs" />
+    <Compile Include="Models\HTMLHelperDropDownModels.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
     <Compile Include="Models\LeaveRequestName.cs" />
+    <Compile Include="Models\ProjectManagerList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\LeaveRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
@@ -384,7 +392,9 @@
     <Compile Include="ServiceLayer\ProfileService.cs" />
     <Compile Include="ServiceLayer\SHA256HashGenerator.cs" />
     <Compile Include="ServiceLayer\UserService.cs" />
+    <Compile Include="ViewModels\AddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeEditViewModel.cs" />
+    <Compile Include="ViewModels\HRProfileViewModel.cs" />
     <Compile Include="ViewModels\LeaveViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
@@ -401,9 +411,13 @@
     <Content Include="Views\Profile\Views.cshtml" />
     <Content Include="Views\Profile\Edits.cshtml" />
     <Content Include="Views\Leave\Apply.cshtml" />
-    <Content Include="Views\Leave\Viewall.cshtml" />
-    <Content Include="Views\Leave\allrequest.cshtml" />
-    <Content Include="Views\Leave\pendingrequest.cshtml" />
+    <Content Include="Views\Leave\ViewAll.cshtml" />
+    <Content Include="Views\Leave\AllRequest.cshtml" />
+    <Content Include="Views\Leave\PendingRequest.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Profile\HREmployeeView.cshtml" />
+    <Content Include="Views\Profile\HREditProfile.cshtml" />
+    <Content Include="Views\Profile\AddNewEmployee.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -457,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110041347051_update8.resx">
       <DependentUpon>202110041347051_update8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110061655358_update9.resx">
+      <DependentUpon>202110061655358_update9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

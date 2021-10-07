@@ -11,6 +11,7 @@ namespace MVCProject.Repositories
     {
         List<EmployeeDetails> GetUsersByEmailAndPassword(string Email, string Password);
         List<EmployeeDetails> GetManagerID(int id);
+        bool CheckIfDeleteIsAllowed(int id);
     }
 
 
@@ -33,6 +34,16 @@ namespace MVCProject.Repositories
         {
             List<EmployeeDetails> us  = db.employeeDetails.Where(temp => temp.EmployeeID == id ).ToList();
             return us;
+        }
+
+        public bool CheckIfDeleteIsAllowed(int id)
+        {
+            List<EmployeeDetails> us = db.employeeDetails.Where(temp => temp.ProjManagerID == id).ToList();
+
+            if (us.Count == 0)
+                return true;
+            else
+                return false;
         }
 
     }

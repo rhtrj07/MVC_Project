@@ -10,27 +10,27 @@ namespace MVCProject.Controllers
 {
     public class AccountController : Controller
     {
-        IUsersService us;
+        IUsersService UsersServices;
 
-        public AccountController(IUsersService us)
+        public AccountController(IUsersService UsersServices)
         {
-            this.us = us;
+            this.UsersServices = UsersServices;
         }
 
         // GET: Account
         public ActionResult Login()
         {
-            LoginViewModel lvm = new LoginViewModel();
-            return View(lvm);
+            LoginViewModel LoginViewModels = new LoginViewModel();
+            return View(LoginViewModels);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel lvm)
+        public ActionResult Login(LoginViewModel LoginViewModels)
         {
 
             if (ModelState.IsValid)
             {
-                UserViewModel uvm = this.us.GetUsersByEmailAndPassword(lvm.Email, lvm.Password);
+                UserViewModel uvm = this.UsersServices.GetUsersByEmailAndPassword(LoginViewModels.Email, LoginViewModels.Password);
                 if (uvm != null)
                 {
                     Session["CurrentUserID"] = uvm.EmployeeID;
@@ -38,7 +38,7 @@ namespace MVCProject.Controllers
                     Session["CurrentUserEmail"] = uvm.Email;
                     Session["CurrentUserPassword"] = uvm.Password;
                     Session["CurrentUserRole"] = uvm.Role;
-                    Session["CurrentUserDesignation"] = uvm.Designation;
+                    Session["CurrentUserDepartment"] = uvm.Department;
                     Session["CurrentUserProfilePhoto"] = uvm.ImageURL;
 
 
@@ -56,7 +56,7 @@ namespace MVCProject.Controllers
             {
                 ModelState.AddModelError("x", "invalid Data");
             }
-            return View(lvm);
+            return View(LoginViewModels);
         }
 
         public ActionResult Logout()
