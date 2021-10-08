@@ -1,5 +1,6 @@
 ﻿
 @model MVCProject.ViewModels.LeaveViewModel
+@using MVCProject.Models;
 
 @{
     ViewBag.Title = "Apply Leave";
@@ -21,36 +22,47 @@
                         <div class="col-12">
                             <div class="form-group pmd-textfield pmd-textfield-floating-label ">
                                 <label for="leave-type">Leave Type</label>
-                                <select name="LeaveType" id="leave-type" class="form-control" title="Please select a Leave Type" required>
-                                    <option></option>
-                                    <option>Sick Leave</option>
-                                    <option>Casual Leave</option>
-                                    <option>Unpaid Leave</option>
-                                    <option>Paid Leave</option>
-                                </select>
+
+                                @Html.DropDownListFor(temp => temp.LeaveType, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.LeaveType))), "Select Leave Type", new { @class = "form-control" })
+
                             </div>
                         </div>
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(temp => temp.LeaveType)
+                        </div>
+
                         <div class="col-md-6">
                             <div class="form-group pmd-textfield pmd-textfield-floating-label">
                                 @*<label class="control-label" for="datepickerstart">Start Date</label>*@
                                 From:
-                                <input type="date" class="form-control" id="datepickerstart" name="FromDate">
+                                <input type="date" class="form-control" id="datepickerstart" name="FromDate" value=@Model.FromDate >
+                                <div class="text-danger">
+                                    @Html.ValidationMessageFor(temp => temp.FromDate)
+                                </div>
+
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group pmd-textfield pmd-textfield-floating-label">
                                 To:
                                 @*<label class="control-label" for="datepickerend">End Date</label>*@
-                                <input type="date" class="form-control" id="datepickerend" name="ToDate" >
+                                <input type="date" class="form-control" id="datepickerend" name="ToDate" value=@Model.ToDate >
+                                <div class="text-danger">
+                                    @Html.ValidationMessageFor(temp => temp.ToDate)
+                                </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group pmd-textfield pmd-textfield-floating-label">
                                 <label>Reason</label>
-                                <textarea class="form-control" id="reason" name="Description"></textarea>
+                                <textarea class="form-control" id="reason" name="Description">@Model.Description</textarea>
+                                <div class="text-danger">
+                                    @Html.ValidationMessageFor(temp => temp.Description)
+                                </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="card-footer">

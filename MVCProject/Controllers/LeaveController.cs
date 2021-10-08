@@ -37,8 +37,21 @@ namespace MVCProject.Controllers
             LeaveViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
             LeaveViewModels.LeaveStatus = "Pending";
 
-            this.LeaveServices.InsertLeaveRequest(LeaveViewModels);
-            return RedirectToAction("index", "Home");
+            if(ModelState.IsValid)
+            {
+                this.LeaveServices.InsertLeaveRequest(LeaveViewModels);
+                return RedirectToAction("ViewAll", "Leave");
+            }
+
+            else
+            {
+                ModelState.AddModelError("x", "Invalid Data");
+                return View(LeaveViewModels);
+            }
+            
+
+
+
         }
 
         public ActionResult ViewAll()

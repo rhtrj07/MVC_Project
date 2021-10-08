@@ -23,12 +23,18 @@
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <label class="labels">Name</label><input type="text" class="form-control" name="FName" value=@Model.FName placeholder="Enter First Name">
+                           <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.FName)
+                            </div>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Invalid First Name</div>
 
                         </div>
                         <div class="col-md-6">
                             <label class="labels">Surname</label><input type="text" class="form-control" name="LName" value=@Model.LName placeholder="Enter Last Name">
+                           <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.LName)
+                            </div>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Invalid Last Name</div>
                         </div>
@@ -38,39 +44,65 @@
                         <div class="row mt-3">
 
                             <div class="col-md-12"><label class="labels">Email ID</label><input type="email" class="form-control" name="Email" value=@Model.Email placeholder="Enter Email"></div>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.Email)
+                            </div>
+
 
                             <div class="col-md-12"><label class="labels">Password </label><input type="text" class="form-control" name="PasswordHash" value=@Model.PasswordHash placeholder="Enter Password"></div>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.PasswordHash)
+                            </div>
+
 
 
                             <div class="col-md-12">
                                 <label class="labels">Department</label>
                                 @Html.DropDownListFor(m => m.Department, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Department))), "Select Department", new { @class = "form-control" })
                             </div>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.Department)
+                            </div>
 
                             <div class="col-md-12">
                                 <label class="labels">Role</label>
                                 @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Role))), "Select Role", new { @class = "form-control" })
                             </div>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.Role)
+                            </div>
 
                             <div class="col-md-12"><label class="labels">Date Of Birth</label><input type="date" class="form-control" name="DOB" value=@Model.DOB.ToString("yyyy-MM-dd")></div>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.DOB)
+                            </div>
+
                             <div class="col-md-12">
                                 <label class="labels">Project Manager</label>
                                 @Html.DropDownListFor(m => m.ProjManagerID, new SelectList(ViewBag.PMList, "EmployeeID", "FName"), new { @class = "form-control" })
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Gender</label>
-                                @Html.DropDownListFor(m => m.Gender, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Gender))), "Select Gender", new { @class = "form-control" })
+                                <div class="text-danger">
+                                    @Html.ValidationMessageFor(temp => temp.ProjManagerID)
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="labels">Gender</label>
+                                    @Html.DropDownListFor(m => m.Gender, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Gender))), "Select Gender", new { @class = "form-control" })
+                                    <div class="text-danger">
+                                        @Html.ValidationMessageFor(temp => temp.Gender)
+                                    </div>
+
+                                </div>
 
                             </div>
                         </div>
 
                         <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" name="Mobile" value="@Model.Mobile"></div>
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(temp => temp.Mobile)
+                        </div>
 
                     </div>
                     <div class="mt-5 text-center"><button type="submit" class="btn btn-primary profile-button">Update Profile</button></div>
-                    <div class="text-danger">
-                        @Html.ValidationSummary()
-                    </div>
+                    
 </div>
             </form>
         </div>

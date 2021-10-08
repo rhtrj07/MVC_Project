@@ -16,14 +16,24 @@ namespace MVCProject.ViewModels
 
         public string LName { get; set; }
 
-        public long Mobile { get; set; }
-
         public string Department { get; set; }
 
         public string Role { get; set; }
 
-        
         public string Email { get; set; }
+
+        public string ImageURL { get; set; }
+
+        public int ProjManagerID { get; set; }
+
+        public string PMFName { get; set; }
+
+        public string PMLName { get; set; }
+
+
+        [Required(ErrorMessage = "Mobie number can't be blank")]
+        [RegularExpression(@"(^[0-9]{10}$)", ErrorMessage = "Mobile number is not valid")]
+        public long Mobile { get; set; }
 
         [Required]
         public DateTime DOB { get; set; }
@@ -31,20 +41,13 @@ namespace MVCProject.ViewModels
         [Required]
         public string Gender { get; set; }
 
-        public string ImageURL { get; set; }
-
         [Required]
         public string Address { get; set; }
 
         [Required]
         public string Location { get; set; }
 
-
-        public int ProjManagerID { get; set; }
-
-        public string PMFName { get; set; }
-
-        public string PMLName { get; set; }
+        
 
     }
 }

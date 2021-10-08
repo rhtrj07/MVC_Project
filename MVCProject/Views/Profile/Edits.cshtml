@@ -35,41 +35,53 @@
                         <div class="col-md-6"><label class="labels"> :  @Model.Role </label></div>
                     </div>
                     <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Project Manager</label></div>
+                        <div class="col-md-6"><label class="labels"> :  @Model.PMFName @Model.PMLName </label></div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="row mt-3">
                             <div class="col-md-12"><label class="labels">Date Of Birth</label><input type="date" class="form-control" name="DOB" value=@Model.DOB.ToString("yyyy-MM-dd")></div>
-
-                            @if (Model.Role == "Employee")
-                            {
-                                <div class="col-md-12">
-                                    <label class="labels">Project Manager</label>
-                                    @Html.DropDownListFor(m => m.ProjManagerID, new SelectList(ViewBag.PMList, "EmployeeID", "FName"), new { @class = "form-control" })
-                                </div>
-
-                            }
-                          
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.DOB)
+                            </div>
 
                             <div class="col-md-12">
                                 <label class="labels">Gender</label>
                                 @Html.DropDownListFor(m => m.Gender, new SelectList(Enum.GetValues(typeof(HTMLHelperDropDownModels.Gender))), "Select Gender", new { @class = "form-control" })
-
                             </div>
-                            <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" name="Mobile" value="@Model.Mobile"></div>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.Gender)
+                            </div>
 
+                            <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" name="Mobile" value=@Model.Mobile ></div>
 
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.Mobile)
+                            </div>
 
                             <div class="col-md-12">
                                 <label class="labels">Address</label>
-
                                 <textarea class="form-control" name="Address" rows="2" cols="1" value="@Model.Address">@Model.Address</textarea>
                             </div>
-                            </textarea>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.Address)
+                            </div>
+
                             <div class="col-md-12"><label class="labels">Location</label><input type="text" class="form-control" placeholder="Location" name="Location" value="@Model.Location"></div>
+                            <div class="text-danger">
+                                @Html.ValidationMessageFor(temp => temp.Location)
+                            </div>
+
                             <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Add New Profile Photo </label><input id="myFile" type="file" class="form-control-file" name="ImageURL" value="@Model.ImageURL"></div>
 
                             </div>
                         </div>
                         <div class="mt-5 text-center"><button type="submit" class="btn btn-primary profile-button">Update Profile</button></div>
+                        <div class="text-danger">
+                           @Html.ValidationSummary();
+                        </div>
                     </div>
                 </form>
             </div>

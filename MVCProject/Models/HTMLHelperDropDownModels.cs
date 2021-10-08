@@ -33,5 +33,14 @@ namespace MVCProject.Models
             HR
             
         }
+        
+        public enum LeaveType
+        {  
+            Sick_Leave ,
+            Casual_Leave ,
+            Unpaid_Leave ,
+            Paid_Leave 
+            
+        }
     }
 }

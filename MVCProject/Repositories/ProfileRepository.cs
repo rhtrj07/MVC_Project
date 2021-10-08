@@ -8,10 +8,11 @@ namespace MVCProject.Repositories
 {
     public interface IProfileRepository
     {
-        List<EmployeeDetails> GetProfileByEmployeeID(int ProfileID);
+        EmployeeDetailsName GetProfileByEmployeeID(int ProfileID);
         List<EmployeeDetailsName> GetProfile();
         List<ProjectManagerList> GetProjectManagerList();
         List<EmployeeDetailsName> GetProfileBySearch(string role, string name);
+        EmployeeDetails CheckEmailAvailable(string email);
         void UpdateEmployeeDetailsFromEmployee(EmployeeDetails u );
         void UpdateEmployeeDetailsFromHR(EmployeeDetails u );
         void InsertIntoEmployee(EmployeeDetails u );
@@ -27,10 +28,33 @@ namespace MVCProject.Repositories
             db = new EmployeeDBContext();
         }
 
-        public List<EmployeeDetails> GetProfileByEmployeeID(int ProfileID)
+        public EmployeeDetailsName GetProfileByEmployeeID(int ProfileID)
         {
-            List<EmployeeDetails> ed = db.employeeDetails.Where(temp => temp.EmployeeID == ProfileID).ToList();
-            return ed;
+            EmployeeDetailsName edn = new EmployeeDetailsName();
+
+            EmployeeDetails ed = db.employeeDetails.Where(temp => temp.EmployeeID == ProfileID).ToList().FirstOrDefault();
+
+
+            edn.EmployeeID = ed.EmployeeID;
+            edn.Location = ed.Location;
+            edn.ProjManagerID = ed.ProjManagerID;
+            edn.DOB = ed.DOB;
+            edn.FName = ed.FName;
+            edn.LName = ed.LName;
+            edn.Mobile = ed.Mobile;
+            edn.Email = ed.Email;
+            edn.Department = ed.Department;
+            edn.Role = ed.Role;
+            edn.Gender = ed.Gender;
+            edn.ImageURL = ed.ImageURL;
+            edn.Address = ed.Address;
+
+            edn.PMFName = db.employeeDetails.Where(temp => temp.EmployeeID == ed.ProjManagerID).Select(m => m.FName).ToList().FirstOrDefault();
+            edn.PMLName = db.employeeDetails.Where(temp => temp.EmployeeID == ed.ProjManagerID).Select(m => m.LName).ToList().FirstOrDefault();
+          
+
+
+            return edn;
 
         }
 
@@ -206,6 +230,12 @@ namespace MVCProject.Repositories
             }
             
             
+        }
+
+        public EmployeeDetails CheckEmailAvailable(string email)
+        {
+            EmployeeDetails employee = db.employeeDetails.Where(x => x.Email == email).ToList().FirstOrDefault();
+            return employee;
         }
 
     }

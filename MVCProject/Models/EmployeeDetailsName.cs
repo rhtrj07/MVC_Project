@@ -20,6 +20,7 @@ namespace MVCProject.Models
         public string ImageURL { get; set; }
         public string Address { get; set; }
         public string Location { get; set; }
+        public int? ProjManagerID { get; set; }
 
         public string PMFName { get; set; }
         public string PMLName { get; set; }

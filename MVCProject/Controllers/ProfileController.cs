@@ -37,7 +37,7 @@ namespace MVCProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edits(ProfileViewModel ProfileViewModel)
+        public ActionResult Edits(ProfileViewModel ProfileViewModels)
         {
             try
             {
@@ -46,32 +46,34 @@ namespace MVCProject.Controllers
                 file.InputStream.Read(imagebyte, 0, file.ContentLength - 1);
                 var base64string = Convert.ToBase64String(imagebyte, 0, imagebyte.Length);
                 byte[] data = Convert.FromBase64String(base64string);
-                ProfileViewModel.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
+                ProfileViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
                 string folderPath = Server.MapPath("~/Images/");
-                string imagepath = ProfileViewModel.ImageURL = "/Images/" + ProfileViewModel.EmployeeID + ".jpeg";
+                string imagepath = ProfileViewModels.ImageURL = "/Images/" + ProfileViewModels.EmployeeID + ".jpeg";
                 System.IO.File.WriteAllBytes(imagepath, data);
-                Session["CurrentUserEmail"] = ProfileViewModel.ImageURL;
+                Session["CurrentUserEmail"] = ProfileViewModels.ImageURL;
 
             }
             catch
             {
-                ProfileViewModel.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
-                ProfileViewModel.ImageURL =  "/Images/" + ProfileViewModel.EmployeeID + ".jpeg";
-                Session["CurrentUserEmail"] = ProfileViewModel.ImageURL;
+                ProfileViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
+                ProfileViewModels.ImageURL =  "/Images/" + ProfileViewModels.EmployeeID + ".jpeg";
+                Session["CurrentUserEmail"] = ProfileViewModels.ImageURL;
             }
            
 
             if (ModelState.IsValid)
             {
 
-                this.ProfileServices.UpdateEmployeeDetails(ProfileViewModel);
+                this.ProfileServices.UpdateEmployeeDetails(ProfileViewModels);
                 return RedirectToAction("Views", "Profile");
             }
             else
             {
                 ModelState.AddModelError("x", "Invalid Data");
+
+                int uid = Convert.ToInt32(Session["CurrentUserID"]);
                 
-                return View(ProfileViewModel);
+                return View(ProfileViewModels);
             }
 
         }
@@ -114,7 +116,6 @@ namespace MVCProject.Controllers
                 file.InputStream.Read(imagebyte, 0, file.ContentLength - 1);
                 var base64string = Convert.ToBase64String(imagebyte, 0, imagebyte.Length);
                 byte[] data = Convert.FromBase64String(base64string);
-                HRProfileViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
                 string folderPath = Server.MapPath("~/Images/");
                 string imagepath = folderPath + HRProfileViewModels.EmployeeID + ".jpeg";
                 HRProfileViewModels.ImageURL = "/Images/" + HRProfileViewModels.EmployeeID + ".jpeg";
@@ -123,7 +124,6 @@ namespace MVCProject.Controllers
             }
             catch
             {
-                HRProfileViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
                 HRProfileViewModels.ImageURL = "/Images/" + HRProfileViewModels.EmployeeID + ".jpeg";
                 Session["CurrentUserEmail"] = HRProfileViewModels.ImageURL;
             }
@@ -136,12 +136,13 @@ namespace MVCProject.Controllers
             }
             else
             {
+                List<ProjectManagerList> ProjectManagerLists = this.ProfileServices.GetProjectManagerList();
+                ViewBag.PMList = ProjectManagerLists;
                 ModelState.AddModelError("x", "Invalid Data");
                 return View(HRProfileViewModels);
             }
 
         }
-
 
 
         public ActionResult HRDeleteProfile(int id)
@@ -163,7 +164,6 @@ namespace MVCProject.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddNewEmployee(AddNewEmployeeViewModel AddNewEmployeeViewModels)
@@ -171,19 +171,29 @@ namespace MVCProject.Controllers
             List<ProjectManagerList> ProjectManagerLists = this.ProfileServices.GetProjectManagerList();
             ViewBag.PMList = ProjectManagerLists;
 
+            bool valids = this.ProfileServices.CheckEmailAvailable(AddNewEmployeeViewModels.Email);
 
-
-            if (ModelState.IsValid)
+            if(valids)
             {
-                this.ProfileServices.AddEmployee(AddNewEmployeeViewModels);
+                if (ModelState.IsValid)
+                {
+                    this.ProfileServices.AddEmployee(AddNewEmployeeViewModels);
 
-                return RedirectToAction("HREmployeeView", "Profile");
+                    return RedirectToAction("HREmployeeView", "Profile");
+                }
+                else
+                {
+                    ModelState.AddModelError("x", "Invalid Data");
+                }
+                return View(AddNewEmployeeViewModels);
             }
+
             else
             {
-                ModelState.AddModelError("x", "Invalid Data");
+                ModelState.AddModelError("x", "Email Already Exist");
+                return View(AddNewEmployeeViewModels);
             }
-            return View(AddNewEmployeeViewModels);
+           
         }
 
     }

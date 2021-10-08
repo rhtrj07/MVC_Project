@@ -16,6 +16,7 @@ namespace MVCProject.ServiceLayer
         List<HRProfileViewModel> GetProfile();
         List<HRProfileViewModel> GetProfileBySearch(string role , string name);
         List<ProjectManagerList> GetProjectManagerList();
+        bool CheckEmailAvailable(string email);
         void UpdateEmployeeDetails(ProfileViewModel pvm);
         void AddEmployee(AddNewEmployeeViewModel AddNewEmployeeViewModels);
         void DeleteEmployee(int id);
@@ -34,26 +35,26 @@ namespace MVCProject.ServiceLayer
 
         public ProfileViewModel GetProfileByEmployeeID(int UserID)
         {
-            EmployeeDetails p = ProfileRepositories.GetProfileByEmployeeID(UserID).FirstOrDefault();
+            EmployeeDetailsName p = ProfileRepositories.GetProfileByEmployeeID(UserID);
             ProfileViewModel pvm = null;
             if (p != null)
             {
-                var config = new MapperConfiguration(cfg => { cfg.CreateMap<EmployeeDetails, ProfileViewModel>(); cfg.IgnoreUnmapped(); });
+                var config = new MapperConfiguration(cfg => { cfg.CreateMap<EmployeeDetailsName, ProfileViewModel>(); cfg.IgnoreUnmapped(); });
                 IMapper mapper = config.CreateMapper();
-                pvm = mapper.Map<EmployeeDetails, ProfileViewModel>(p);
+                pvm = mapper.Map<EmployeeDetailsName, ProfileViewModel>(p);
             }
             return pvm;
         } 
         
         public HRProfileViewModel HRGetProfileByEmployeeID(int UserID)
         {
-            EmployeeDetails p = ProfileRepositories.GetProfileByEmployeeID(UserID).FirstOrDefault();
+            EmployeeDetailsName p = ProfileRepositories.GetProfileByEmployeeID(UserID);
             HRProfileViewModel pvm = null;
             if (p != null)
             {
-                var config = new MapperConfiguration(cfg => { cfg.CreateMap<EmployeeDetails, HRProfileViewModel>(); cfg.IgnoreUnmapped(); });
+                var config = new MapperConfiguration(cfg => { cfg.CreateMap<EmployeeDetailsName, HRProfileViewModel>(); cfg.IgnoreUnmapped(); });
                 IMapper mapper = config.CreateMapper();
-                pvm = mapper.Map<EmployeeDetails, HRProfileViewModel>(p);
+                pvm = mapper.Map<EmployeeDetailsName, HRProfileViewModel>(p);
             }
             return pvm;
         }
@@ -122,5 +123,17 @@ namespace MVCProject.ServiceLayer
             ProfileRepositories.DeleteEmployeeByID(id);
         }
 
+        public bool CheckEmailAvailable(string email)
+        {
+            ProfileRepositories.CheckEmailAvailable(email);
+
+            EmployeeDetails EmployeeDetail = ProfileRepositories.CheckEmailAvailable(email);
+
+            if (EmployeeDetail != null)
+                return false;
+            else
+                return true;
+
+        }
     }
 }

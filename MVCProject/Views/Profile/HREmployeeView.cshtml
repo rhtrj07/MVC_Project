@@ -108,9 +108,12 @@
             url: "/api/delete?id=" + $(this).attr('at'), type: "GET", success:
                 function (response) {
 
-                    if (!response) {
-                       
-                        confirm('Please reassign every employee to another manager before deleting');      
+                    if (response) {
+
+
+                    }
+                    else {
+                        confirm('Please reassign every employee to another manager before deleting');
                     }
                   
                 },
