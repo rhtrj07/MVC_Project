@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
-
+using MVCProject.Filter;
 
 namespace MVCProject.Controllers
 {
@@ -18,6 +18,8 @@ namespace MVCProject.Controllers
             this.ProfileServices = ProfileServices;
         }
 
+        [AuthenticationFilter]
+        [EmployeeAndManagerAuthorizationFilter]
         public ActionResult Views()
         {
             int uid = Convert.ToInt32(Session["CurrentUserID"]);
@@ -25,6 +27,8 @@ namespace MVCProject.Controllers
             return View(pvm);
         }
 
+        [AuthenticationFilter]
+        [EmployeeAndManagerAuthorizationFilter]
         public ActionResult Edits()
         {
             List<ProjectManagerList> ProjectManagerLists = this.ProfileServices.GetProjectManagerList();
@@ -35,6 +39,8 @@ namespace MVCProject.Controllers
             return View(pvm);
         }
 
+        [AuthenticationFilter]
+        [EmployeeAndManagerAuthorizationFilter]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edits(ProfileViewModel ProfileViewModels)
@@ -78,12 +84,16 @@ namespace MVCProject.Controllers
 
         }
 
+        [AuthenticationFilter]
+        [HrAuthorizationFilter]
         public ActionResult HREmployeeView()
         {
             List<HRProfileViewModel> pvm = this.ProfileServices.GetProfile();
             return View(pvm);
         }
 
+        [AuthenticationFilter]
+        [HrAuthorizationFilter]
         [HttpPost]
         public ActionResult HREmployeeView(string role , string name)
         {
@@ -96,6 +106,8 @@ namespace MVCProject.Controllers
             return View(pvm);
         }
 
+        [AuthenticationFilter]
+        [HrAuthorizationFilter]
         public ActionResult HREditProfile(int id)
         {
             List<ProjectManagerList> ProjectManagerLists = this.ProfileServices.GetProjectManagerList();
@@ -105,6 +117,8 @@ namespace MVCProject.Controllers
             return View(pvm);
         }
 
+        [AuthenticationFilter]
+        [HrAuthorizationFilter]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HREditProfile(HRProfileViewModel HRProfileViewModels)
@@ -144,7 +158,8 @@ namespace MVCProject.Controllers
 
         }
 
-
+        [AuthenticationFilter]
+        [HrAuthorizationFilter]
         public ActionResult HRDeleteProfile(int id)
         {
             this.ProfileServices.DeleteEmployee(id);
@@ -152,18 +167,20 @@ namespace MVCProject.Controllers
             return RedirectToAction("HREmployeeView", "Profile");
         }
 
-
+        [AuthenticationFilter]
+        [HrAuthorizationFilter]
         public ActionResult AddNewEmployee()
         {
             List<ProjectManagerList> ProjectManagerLists = this.ProfileServices.GetProjectManagerList();
             ViewBag.PMList = ProjectManagerLists;
 
-
             AddNewEmployeeViewModel AddNewEmployeeViewModels = new AddNewEmployeeViewModel();
             return View(AddNewEmployeeViewModels);
         }
 
-
+        
+        [AuthenticationFilter]
+        [HrAuthorizationFilter]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddNewEmployee(AddNewEmployeeViewModel AddNewEmployeeViewModels)
@@ -178,7 +195,6 @@ namespace MVCProject.Controllers
                 if (ModelState.IsValid)
                 {
                     this.ProfileServices.AddEmployee(AddNewEmployeeViewModels);
-
                     return RedirectToAction("HREmployeeView", "Profile");
                 }
                 else

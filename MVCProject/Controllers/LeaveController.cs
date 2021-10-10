@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVCProject.ViewModels;
 using MVCProject.ServiceLayer;
+using MVCProject.Filter;
 
 
 namespace MVCProject.Controllers
@@ -20,13 +21,16 @@ namespace MVCProject.Controllers
             this.LeaveServices = LeaveServices;
         }
 
-        // GET: Leave
+        [AuthenticationFilter]
+        [EmployeeAuthorizationFilter]
         public ActionResult Apply()
         {
             LeaveViewModel LeaveViewModels = new LeaveViewModel();
             return View(LeaveViewModels);
         }
 
+        [AuthenticationFilter]
+        [EmployeeAuthorizationFilter]
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public ActionResult Apply(LeaveViewModel LeaveViewModels)
@@ -54,6 +58,8 @@ namespace MVCProject.Controllers
 
         }
 
+        [AuthenticationFilter]
+        [EmployeeAuthorizationFilter]
         public ActionResult ViewAll()
         {
             int id = Convert.ToInt32(Session["CurrentUserID"]);
@@ -62,21 +68,26 @@ namespace MVCProject.Controllers
         }
 
 
-
+        [AuthenticationFilter]
+        [ProjectManagerAuthorizationFilter]
         public ActionResult AllRequest()
         {
             int id = Convert.ToInt32(Session["CurrentUserID"]);
             List<LeaveViewModel> LeaveViewModels = this.LeaveServices.GetAllRequestByPMID(id);
             return View(LeaveViewModels);
-        } 
-         
+        }
+
+        [AuthenticationFilter]
+        [ProjectManagerAuthorizationFilter]
         public ActionResult PendingRequest()
         {
             int id = Convert.ToInt32(Session["CurrentUserID"]);
             List<LeaveViewModel> LeaveViewModels = this.LeaveServices.GetAllRequestByPMID(id);
             return View(LeaveViewModels);
-        } 
-        
+        }
+
+        [AuthenticationFilter]
+        [ProjectManagerAuthorizationFilter]
         public ActionResult updatestatus(UpdateStatusViewModel UpdateStatusViewModels)
         {
             int id = UpdateStatusViewModels.LeaveRequestID;
