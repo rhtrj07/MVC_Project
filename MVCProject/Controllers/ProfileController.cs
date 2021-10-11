@@ -54,18 +54,19 @@ namespace MVCProject.Controllers
                 byte[] data = Convert.FromBase64String(base64string);
                 ProfileViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
                 string folderPath = Server.MapPath("~/Images/");
+                folderPath = folderPath + ProfileViewModels.EmployeeID + ".jpeg";
                 string imagepath = ProfileViewModels.ImageURL = "/Images/" + ProfileViewModels.EmployeeID + ".jpeg";
-                System.IO.File.WriteAllBytes(imagepath, data);
-                Session["CurrentUserEmail"] = ProfileViewModels.ImageURL;
+                System.IO.File.WriteAllBytes(folderPath, data);
+                Session["CurrentUserProfilePhoto"] = ProfileViewModels.ImageURL;
 
             }
             catch
             {
                 ProfileViewModels.EmployeeID = Convert.ToInt32(Session["CurrentUserID"]);
-                ProfileViewModels.ImageURL =  "/Images/" + ProfileViewModels.EmployeeID + ".jpeg";
-                Session["CurrentUserEmail"] = ProfileViewModels.ImageURL;
+                ProfileViewModels.ImageURL = "/Images/" + ProfileViewModels.EmployeeID + ".jpeg";
+                Session["CurrentUserProfilePhoto"] = ProfileViewModels.ImageURL;
             }
-           
+
 
             if (ModelState.IsValid)
             {
@@ -133,13 +134,11 @@ namespace MVCProject.Controllers
                 string folderPath = Server.MapPath("~/Images/");
                 string imagepath = folderPath + HRProfileViewModels.EmployeeID + ".jpeg";
                 HRProfileViewModels.ImageURL = "/Images/" + HRProfileViewModels.EmployeeID + ".jpeg";
-                string path = Path.Combine(Environment.CurrentDirectory, @"Data", "Images");
                 System.IO.File.WriteAllBytes(imagepath, data);
             }
             catch
             {
                 HRProfileViewModels.ImageURL = "/Images/" + HRProfileViewModels.EmployeeID + ".jpeg";
-                Session["CurrentUserEmail"] = HRProfileViewModels.ImageURL;
             }
 
 

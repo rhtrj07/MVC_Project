@@ -163,6 +163,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Error\ErrorPage402.html" />
+    <Content Include="Error\ErrorPage403.html" />
+    <Content Include="Error\Image\text.png" />
+    <Content Include="Error\ErrorPage404.html" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

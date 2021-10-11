@@ -13,30 +13,41 @@
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-5">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <form novalidate="novalidate" action="/profile/edits" method="post" class="needs-validation" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Name : </label> @Model.FName</div>
-                        <div class="col-md-6"><label class="labels">  Surname : </label> @Model.LName </div>
+                    <div class="row mt-3">
+                        <div class="col-md-5"><label class="labels">Name : </label> @Model.FName</div> 
+                        <div class="col-md-5"><label class="labels">  Surname : </label> @Model.LName </div> 
                     </div>
+                            <input name="FName" value=@Model.FName hidden /> <input name="LName" value=@Model.LName hidden />
+                    </div> 
                     <div class="row mt-3">
                         <div class="col-md-6"><label class="labels">Email ID</label> </div>
                         <div class="col-md-6"><label class="labels"> :  @Model.Email </label></div>
+                        <input name="Email" value=@Model.Email hidden />
+
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6"><label class="labels">Department</label></div>
                         <div class="col-md-6"><label class="labels"> :  @Model.Department </label></div>
+                        <input name="Department" value=@Model.Department hidden />
+
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6"><label class="labels">Role</label> </div>
                         <div class="col-md-6"><label class="labels"> :  @Model.Role </label></div>
+                        <input name="Role" value=@Model.Role hidden />
+
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6"><label class="labels">Project Manager</label></div>
                         <div class="col-md-6"><label class="labels"> :  @Model.PMFName @Model.PMLName </label></div>
+                        <input name="PMFName" value=@Model.PMFName hidden />
+                        <input name="PMLName" value=@Model.PMLName hidden />
+
                     </div>
 
                     <div class="row mt-3">
