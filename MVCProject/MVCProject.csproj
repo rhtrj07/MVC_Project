@@ -380,6 +380,10 @@
     <Compile Include="Migrations\202110061655358_update9.designer.cs">
       <DependentUpon>202110061655358_update9.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110110551063_isspeacialpermission.cs" />
+    <Compile Include="Migrations\202110110551063_isspeacialpermission.designer.cs">
+      <DependentUpon>202110110551063_isspeacialpermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeDBContext.cs" />
     <Compile Include="Models\EmployeeDetails.cs" />
@@ -423,6 +427,7 @@
     <Content Include="Views\Profile\HREmployeeView.cshtml" />
     <Content Include="Views\Profile\HREditProfile.cshtml" />
     <Content Include="Views\Profile\AddNewEmployee.cshtml" />
+    <Content Include="Views\Leave\HRAllRequest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -479,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110061655358_update9.resx">
       <DependentUpon>202110061655358_update9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110110551063_isspeacialpermission.resx">
+      <DependentUpon>202110110551063_isspeacialpermission.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

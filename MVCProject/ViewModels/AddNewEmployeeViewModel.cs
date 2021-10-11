@@ -36,6 +36,8 @@ namespace MVCProject.ViewModels
         [Required]
         public string Gender { get; set; }
 
+        public bool IsSpecialPermission { get; set; }
+
         public int? ProjManagerID { get; set; }
         public DateTime DOB { get; set; }
         

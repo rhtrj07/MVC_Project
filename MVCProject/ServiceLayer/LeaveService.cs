@@ -16,6 +16,7 @@ namespace MVCProject.ServiceLayer
         void UpstateStatusByLeaveID(UpdateStatusViewModel usvm);
         List<LeaveViewModel> GetAllRequestByID(int id);
         List<LeaveViewModel> GetAllRequestByPMID(int id);
+        List<LeaveViewModel> GetAllRequest();
     }
 
 
@@ -51,6 +52,16 @@ namespace MVCProject.ServiceLayer
         public List<LeaveViewModel> GetAllRequestByPMID(int id)
         {
             List<LeaveRequestName> ll = lr.GetAllRequestByPMID(id);
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<LeaveRequestName, LeaveViewModel>(); cfg.IgnoreUnmapped(); });
+            IMapper mapper = config.CreateMapper();
+            List<LeaveViewModel> u = mapper.Map<List<LeaveRequestName>, List<LeaveViewModel>>(ll);
+            return u;
+
+        } 
+        
+        public List<LeaveViewModel> GetAllRequest()
+        {
+            List<LeaveRequestName> ll = lr.GetAllRequest();
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<LeaveRequestName, LeaveViewModel>(); cfg.IgnoreUnmapped(); });
             IMapper mapper = config.CreateMapper();
             List<LeaveViewModel> u = mapper.Map<List<LeaveRequestName>, List<LeaveViewModel>>(ll);

@@ -40,8 +40,7 @@ namespace MVCProject.Controllers
                     Session["CurrentUserRole"] = uvm.Role;
                     Session["CurrentUserDepartment"] = uvm.Department;
                     Session["CurrentUserProfilePhoto"] = uvm.ImageURL;
-
-
+                    Session["IsSpecialPermission"] = uvm.IsSpecialPermission;
 
                     return RedirectToAction("index", "Home");
 

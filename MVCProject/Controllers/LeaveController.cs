@@ -95,5 +95,24 @@ namespace MVCProject.Controllers
 
             return RedirectToAction("allrequest", "Leave");
         }
+
+        [AuthenticationFilter]
+        [SpecialHRAuthorizationFilter]
+        public ActionResult HRUpdateStatus(UpdateStatusViewModel UpdateStatusViewModels)
+        {
+            int id = UpdateStatusViewModels.LeaveRequestID;
+            this.LeaveServices.UpstateStatusByLeaveID(UpdateStatusViewModels);
+
+            return RedirectToAction("HRAllRequest", "Leave");
+        }
+
+        [AuthenticationFilter]
+        [SpecialHRAuthorizationFilter]
+        public ActionResult HRAllRequest()
+        {
+            
+            List<LeaveViewModel> LeaveViewModels = this.LeaveServices.GetAllRequest();
+            return View(LeaveViewModels);
+        }
     }
 }

@@ -70,4 +70,17 @@ namespace MVCProject.Filter
         }
 
     }
+
+    public class SpecialHRAuthorizationFilter : ActionFilterAttribute , IAuthorizationFilter
+    {
+        public void OnAuthorization(AuthorizationContext filterContext)
+        {
+
+            if (filterContext.RequestContext.HttpContext.Session["CurrentUserRole"].ToString() != "HR" || filterContext.RequestContext.HttpContext.Session["IsSpecialPermission"] is false)
+            {
+                filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Home", action = "Index" }));
+            }
+        }
+
+    }
 }

@@ -36,6 +36,8 @@ namespace MVCProject.Models
         public string Address { get; set; }
         public string Location { get; set; }
 
+        public bool IsSpecialPermission { get; set; }
+
         [ForeignKey("ProjManagerID")]
         public virtual EmployeeDetails ProjIDEmployee { get; set; }
 

@@ -23,7 +23,7 @@
                 <div class="sidebar-content">
                     <!-- sidebar-brand  -->
                     <div class="sidebar-item sidebar-brand">
-                        <a href="#">pro sidebar</a>
+                        <a href="#">Leave Management</a>
                     </div>
 
                     @if (Session["CurrentUserName"] == null)
@@ -90,9 +90,9 @@
                                 <span>General</span>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="/home/index">
                                     <i class="fa fa-home"></i>
-                                    <span class="menu-text">Dashboard</span>
+                                    <span class="menu-text">Home</span>
                                 </a>
                             </li>
                             @if (Session["CurrentUserRole"] != null)
@@ -201,7 +201,7 @@
                                         <div class="sidebar-submenu">
                                             <ul>
                                                 <li>
-                                                    <a href="/profile/HREmployeeView">View All</a>
+                                                    <a href="/profile/HREmployeeView">View All </a>
                                                 </li>
                                                 <li>
                                                     <a href="/profile/AddNewEmployee">Add New</a>
@@ -209,7 +209,33 @@
                                             </ul>
                                         </div>
                                     </li>
+
+                                    if(Session["IsSpecialPermission"] is true)
+                                    {
+                                        <li class="sidebar-dropdown">
+                                            <a href="#">
+                                                <i class="fas fa-glass-cheers"></i>
+                                                <span class="menu-text">Leave Request</span>
+                                                <span class="badge badge-pill badge-danger">2</span>
+                                            </a>
+                                            <div class="sidebar-submenu">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/leave/hrallrequest">All Request</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/leave/PendingRequest">Pending Request</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    }
+
+
                                 }
+
+
+
                             }
 
 

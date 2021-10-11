@@ -210,9 +210,10 @@ namespace MVCProject.Repositories
             us.ImageURL = u.ImageURL;
             us.Address = u.Address;
             us.Location = u.Location;
+            us.IsSpecialPermission = u.IsSpecialPermission;
             db.employeeDetails.Add(us);
             db.SaveChanges();
-
+            
         }
 
         public void DeleteEmployeeByID(int id)

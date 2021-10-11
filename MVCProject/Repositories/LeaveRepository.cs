@@ -12,6 +12,7 @@ namespace MVCProject.Repositories
         void UpstateStatusByLeaveID(LeaveRequest lr);
         List<LeaveRequest> GetAllRequestByID(int id);
         List<LeaveRequestName> GetAllRequestByPMID(int id);
+        List<LeaveRequestName> GetAllRequest();
     }
 
     public class LeaveRepository : ILeaveRepository
@@ -40,6 +41,29 @@ namespace MVCProject.Repositories
             List<LeaveRequestName> lrn = new List<LeaveRequestName>();
  
             List<LeaveRequest> qt = db.LeaveRequests.Where(temp => temp.ProjManagerID == id ).ToList();
+
+            foreach (var item in qt)
+            {
+                lrn.Add(new LeaveRequestName{
+                    LeaveRequestID = item.LeaveRequestID,
+                    FromDate = item.FromDate,
+                    ToDate = item.ToDate,
+                    Description = item.Description,
+                    LeaveStatus = item.LeaveStatus,
+                    LeaveType = item.LeaveType,
+                    FName = db.employeeDetails.Where(temp => temp.EmployeeID == item.EmployeeID).Select(m => m.FName).ToList().FirstOrDefault(),
+                    LName = db.employeeDetails.Where(temp => temp.EmployeeID == item.EmployeeID).Select(m => m.LName).ToList().FirstOrDefault()
+                }) ;
+               
+            }
+            return lrn;
+        } 
+        
+        public List<LeaveRequestName> GetAllRequest()
+        {
+            List<LeaveRequestName> lrn = new List<LeaveRequestName>();
+ 
+            List<LeaveRequest> qt = db.LeaveRequests.ToList();
 
             foreach (var item in qt)
             {
