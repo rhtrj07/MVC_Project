@@ -107,6 +107,7 @@ namespace MVCProject.Controllers
             return View(pvm);
         }
 
+
         [AuthenticationFilter]
         [HrAuthorizationFilter]
         public ActionResult HREditProfile(int id)

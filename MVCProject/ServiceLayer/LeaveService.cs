@@ -13,7 +13,7 @@ namespace MVCProject.ServiceLayer
     public interface ILeaveService
     {
         void InsertLeaveRequest(LeaveViewModel lvm);
-        void UpstateStatusByLeaveID(UpdateStatusViewModel usvm);
+        EmailSendViewModel UpstateStatusByLeaveID(UpdateStatusViewModel usvm);
         List<LeaveViewModel> GetAllRequestByID(int id);
         List<LeaveViewModel> GetAllRequestByPMID(int id);
         List<LeaveViewModel> GetAllRequest();
@@ -69,13 +69,20 @@ namespace MVCProject.ServiceLayer
 
         }
         
-        public void UpstateStatusByLeaveID(UpdateStatusViewModel usvm)
+        public EmailSendViewModel UpstateStatusByLeaveID(UpdateStatusViewModel usvm)
         {
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<UpdateStatusViewModel, LeaveRequest>(); cfg.IgnoreUnmapped(); });
             IMapper mapper = config.CreateMapper();
             LeaveRequest u = mapper.Map<UpdateStatusViewModel, LeaveRequest>(usvm);
-            lr.UpstateStatusByLeaveID(u);
+            EmployeeDetails s = lr.UpstateStatusByLeaveID(u);
 
+            var config1 = new MapperConfiguration(cfg => { cfg.CreateMap<EmployeeDetails, EmailSendViewModel>(); cfg.IgnoreUnmapped(); });
+            IMapper mapper1 = config1.CreateMapper();
+            EmailSendViewModel Ems = mapper1.Map<EmployeeDetails, EmailSendViewModel>(s);
+
+            Ems.LeaveStatus = usvm.LeaveStatus;
+
+            return Ems;
         }
     }
 }

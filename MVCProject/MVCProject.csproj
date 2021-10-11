@@ -402,6 +402,7 @@
     <Compile Include="ServiceLayer\SHA256HashGenerator.cs" />
     <Compile Include="ServiceLayer\UserService.cs" />
     <Compile Include="ViewModels\AddNewEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\EmailSendViewModel.cs" />
     <Compile Include="ViewModels\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\HRProfileViewModel.cs" />
     <Compile Include="ViewModels\LeaveViewModel.cs" />

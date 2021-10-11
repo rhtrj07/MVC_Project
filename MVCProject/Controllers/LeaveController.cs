@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using MVCProject.ViewModels;
 using MVCProject.ServiceLayer;
 using MVCProject.Filter;
-
+using System.Net.Mail;
+using System.Net;
 
 namespace MVCProject.Controllers
 {
@@ -91,9 +92,40 @@ namespace MVCProject.Controllers
         public ActionResult updatestatus(UpdateStatusViewModel UpdateStatusViewModels)
         {
             int id = UpdateStatusViewModels.LeaveRequestID;
-            this.LeaveServices.UpstateStatusByLeaveID(UpdateStatusViewModels);
+            EmailSendViewModel EmailModel =  this.LeaveServices.UpstateStatusByLeaveID(UpdateStatusViewModels);
+           // return RedirectToAction("allrequest", "Leave");
 
-            return RedirectToAction("allrequest", "Leave");
+            try
+            {
+                var senderEmail = new MailAddress("mvcp990@gmail.com", "mvc");
+                var receiverEmail = new MailAddress(EmailModel.Email, "Receiver");
+                var password = "mvcp1234";
+                var sub = EmailModel.LeaveStatus + " your leave request";
+                var body = EmailModel.FName + ", your leave request has been " + EmailModel.LeaveStatus + " \n \n by " + Session["CurrentUserName"].ToString() + "(HR)";
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderEmail.Address, password)
+                };
+                using (var mess = new MailMessage(senderEmail, receiverEmail)
+                {
+                    Subject = sub,
+                    Body = body
+                })
+                {
+                    smtp.Send(mess);
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "Some Error";
+            }
+
+            return RedirectToAction("AllRequest", "Leave");
         }
 
         [AuthenticationFilter]
@@ -101,7 +133,37 @@ namespace MVCProject.Controllers
         public ActionResult HRUpdateStatus(UpdateStatusViewModel UpdateStatusViewModels)
         {
             int id = UpdateStatusViewModels.LeaveRequestID;
-            this.LeaveServices.UpstateStatusByLeaveID(UpdateStatusViewModels);
+            EmailSendViewModel EmailModel = this.LeaveServices.UpstateStatusByLeaveID(UpdateStatusViewModels);
+
+            try
+            {
+                var senderEmail = new MailAddress("mvcp990@gmail.com", "mvc");
+                var receiverEmail = new MailAddress(EmailModel.Email, "Receiver");
+                var password = "mvcp1234";
+                var sub = EmailModel.LeaveStatus + " your leave request";
+                var body = EmailModel.FName + ", your leave request has been " + EmailModel.LeaveStatus + " \n \n by "+ Session["CurrentUserName"].ToString() + "(HR)" ;
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderEmail.Address, password)
+                };
+                using (var mess = new MailMessage(senderEmail, receiverEmail)
+                {
+                    Subject = sub,
+                    Body = body
+                })
+                {
+                    smtp.Send(mess);
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "Some Error";
+            }
 
             return RedirectToAction("HRAllRequest", "Leave");
         }
@@ -112,6 +174,7 @@ namespace MVCProject.Controllers
         {
             
             List<LeaveViewModel> LeaveViewModels = this.LeaveServices.GetAllRequest();
+
             return View(LeaveViewModels);
         }
     }

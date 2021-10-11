@@ -9,7 +9,7 @@ namespace MVCProject.Repositories
     public interface ILeaveRepository
     {
         void InsertLeaveRequest(LeaveRequest lr);
-        void UpstateStatusByLeaveID(LeaveRequest lr);
+        EmployeeDetails UpstateStatusByLeaveID(LeaveRequest lr);
         List<LeaveRequest> GetAllRequestByID(int id);
         List<LeaveRequestName> GetAllRequestByPMID(int id);
         List<LeaveRequestName> GetAllRequest();
@@ -82,7 +82,7 @@ namespace MVCProject.Repositories
             return lrn;
         }
         
-        public void UpstateStatusByLeaveID(LeaveRequest lr)
+        public EmployeeDetails UpstateStatusByLeaveID(LeaveRequest lr)
         {
             LeaveRequest lrs = db.LeaveRequests.Where(temp => temp.LeaveRequestID == lr.LeaveRequestID).FirstOrDefault();
             if (lrs != null)
@@ -90,6 +90,10 @@ namespace MVCProject.Repositories
                 lrs.LeaveStatus = lr.LeaveStatus;
                 db.SaveChanges();
             }
+
+            EmployeeDetails employeeDetail = db.employeeDetails.Where(temp => temp.EmployeeID == lrs.EmployeeID).FirstOrDefault();
+
+            return employeeDetail;
         }
     }
 }
